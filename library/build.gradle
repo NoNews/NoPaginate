@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 25
@@ -19,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -30,4 +35,13 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.3.1'
 
+}
+
+publish {
+    groupId = 'ru.alexbykov'
+    artifactId = 'nopaginate'
+    publishVersion = '0.4.2'
+    desc = 'Pagination library for Android'
+    licences = ['Apache-2.0']
+    website = 'https://github.com/NoNews/NoPaginate'
 }

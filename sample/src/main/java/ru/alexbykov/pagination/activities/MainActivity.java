@@ -9,10 +9,10 @@ import java.util.List;
 
 import ru.alexbykov.nopaginate.paginate.Paginate;
 import ru.alexbykov.nopaginate.paginate.PaginateBuilder;
-import ru.alexbykov.pagination.views.IMainActivityView;
-import ru.alexbykov.pagination.presenters.MainActivityPresenter;
 import ru.alexbykov.pagination.R;
 import ru.alexbykov.pagination.adapters.TestAdapter;
+import ru.alexbykov.pagination.presenters.MainActivityPresenter;
+import ru.alexbykov.pagination.views.IMainActivityView;
 
 public class MainActivity extends AppCompatActivity implements IMainActivityView {
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         paginate.unSubscribe();
         super.onDestroy();
     }
