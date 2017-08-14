@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NoPagination</string>
+    <string name="no_pagination_network_error">Network Error. Please check your connection and try
+        later
+    </string>
+    <string name="no_pagination_network_error_button">repeat</string>
+</resources>

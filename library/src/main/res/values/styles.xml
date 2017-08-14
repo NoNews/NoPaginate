@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+
+    <style name="RepeatButtonStyle">
+        <item name="android:textColor">@color/no_pagination_error_background</item>
+        <item name="android:text">@string/no_pagination_network_error_button</item>
+    </style>
+</resources>

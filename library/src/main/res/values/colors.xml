@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="no_pagination_color_button_repeat">#2196F3</color>
+    <color name="no_pagination_color_button_repeat_selected">#90CAF9</color>
+    <color name="no_pagination_error_background">#fff</color>
+    <color name="no_pagination_error_color_separate_line">#E0E0E0</color>
+</resources>
