@@ -12,7 +12,7 @@ import ru.alexbykov.nopaginate.R;
  * You can contact me at: me@alexbykov.ru.
  */
 
-public interface LoadingItem extends BaseItem {
+public interface LoadingItem extends BaseLinearLayoutManagerItem {
 
 
     LoadingItem DEFAULT = new LoadingItem() {

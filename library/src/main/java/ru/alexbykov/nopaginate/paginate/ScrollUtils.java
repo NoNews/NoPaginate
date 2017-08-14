@@ -10,7 +10,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
  * Project: NoPagination
  *
  * @author Alex Bykov
- *         You can contact me at me@alexbykov.ru
+ * You can contact me at me@alexbykov.ru
  */
 class ScrollUtils {
 

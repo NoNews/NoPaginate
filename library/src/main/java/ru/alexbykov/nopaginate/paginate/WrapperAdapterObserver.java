@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.ObserverCallback;
 
+
 /**
- * Created by Alex Bykov on 11.08.2017.
- * You can contact me at: me@alexbykov.ru.
+ * @author @Marko Milos, original repository: https://github.com/MarkoMilos/Paginate
  */
 
 class WrapperAdapterObserver extends RecyclerView.AdapterDataObserver {

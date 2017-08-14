@@ -40,7 +40,7 @@ dependencies {
 publish {
     groupId = 'ru.alexbykov'
     artifactId = 'nopaginate'
-    publishVersion = '0.4.2'
+    publishVersion = '0.4.3'
     desc = 'Pagination library for Android'
     licences = ['Apache-2.0']
     website = 'https://github.com/NoNews/NoPaginate'

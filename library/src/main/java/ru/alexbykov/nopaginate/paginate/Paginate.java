@@ -1,17 +1,22 @@
 package ru.alexbykov.nopaginate.paginate;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.ObserverCallback;
 import ru.alexbykov.nopaginate.callback.OnLoadMore;
 import ru.alexbykov.nopaginate.callback.OnRepeatListener;
+import ru.alexbykov.nopaginate.item.DefaultGridLayoutItem;
 import ru.alexbykov.nopaginate.item.ErrorItem;
 import ru.alexbykov.nopaginate.item.LoadingItem;
+import ru.alexbykov.nopaginate.paginate.grid.WrapperSpanSizeLookup;
+
 
 /**
- * Created by Alex Bykov on 10.08.2017.
- * You can contact me at: me@alexbykov.ru.
+ * @author Alex Bykov and Marko Milos, original repository: https://github.com/MarkoMilos/Paginate
  */
+
 
 public class Paginate implements ObserverCallback, OnRepeatListener {
 
@@ -24,7 +29,7 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
     private ErrorItem errorItem;
     private WrapperAdapterObserver wrapperAdapterObserver;
     private RecyclerView.Adapter userAdapter;
-
+    private WrapperSpanSizeLookup wrapperSpanSizeLookup;
     private boolean isError;
     private boolean isLoading;
     private boolean isLoadedAllItems;
@@ -47,6 +52,17 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
         userAdapter.registerAdapterDataObserver(wrapperAdapterObserver);
         recyclerView.setAdapter(wrapperAdapter);
         wrapperAdapter.setOnRepeatListener(this);
+        checkGridLayoutManager();
+    }
+
+    private void checkGridLayoutManager() {
+        if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
+            DefaultGridLayoutItem item = new DefaultGridLayoutItem(recyclerView.getLayoutManager());
+            wrapperSpanSizeLookup = new WrapperSpanSizeLookup(((GridLayoutManager) recyclerView.getLayoutManager()).getSpanSizeLookup(),
+                    item,
+                    wrapperAdapter);
+            ((GridLayoutManager) recyclerView.getLayoutManager()).setSpanSizeLookup(wrapperSpanSizeLookup);
+        }
     }
 
 
@@ -126,9 +142,14 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
 
 
     public void unSubscribe() {
-        wrapperAdapter.unSubscribe();
-        userAdapter.unregisterAdapterDataObserver(wrapperAdapterObserver);
-        recyclerView.setAdapter(userAdapter);
+        if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
+            wrapperAdapter.unSubscribe();
+            userAdapter.unregisterAdapterDataObserver(wrapperAdapterObserver);
+            recyclerView.setAdapter(userAdapter);
+        } else if (recyclerView.getLayoutManager() instanceof GridLayoutManager && wrapperSpanSizeLookup != null) {
+            GridLayoutManager.SpanSizeLookup spanSizeLookup = wrapperSpanSizeLookup.getWrappedSpanSizeLookup();
+            ((GridLayoutManager) recyclerView.getLayoutManager()).setSpanSizeLookup(spanSizeLookup);
+        }
     }
 
 }

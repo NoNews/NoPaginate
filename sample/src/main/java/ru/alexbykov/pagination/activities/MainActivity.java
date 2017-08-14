@@ -2,8 +2,11 @@ package ru.alexbykov.pagination.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.paginate.recycler.RecyclerPaginate;
 
 import java.util.List;
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     private void setupPagination() {
+
         paginate = new PaginateBuilder()
                 .with(recyclerView)
                 .setCallback(mainActivityPresenter)

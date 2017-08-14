@@ -4,7 +4,7 @@ Android pagination library, based on [@MarkoMilos](https://github.com/MarkoMilos
 ### Gradle
 
 ```
-compile 'ru.alexbykov:nopaginate:0.4.2'
+compile 'ru.alexbykov:nopaginate:0.4.3'
 ```
 
 ### Install
