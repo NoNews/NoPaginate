@@ -9,22 +9,115 @@ compile 'ru.alexbykov:nopaginate:0.4.3'
 
 ### Install
 ```java
-    paginate = new PaginateBuilder()
+  Paginate paginate = new PaginateBuilder()
                 .with(recyclerView)
-                .setCallback(mainActivityPresenter)
+                .setCallback(new OnLoadMore() {
+                    @Override
+                    public void onLoadMore() {
+                       // http or db request
+                    }
+                })
                 .setLoadingTriggerThreshold(5)
                 .build();
-
 ```
 
 ### Actions
 ```java
    paginate.showLoading(show);
    paginate.showError(show);
-   paginate.setPaginateNoMoreItems(set)
+   paginate.setPaginateNoMoreItems(set);
 
 ```
 
+### Custom Loading and Error
+For custom error and loaging item just implement the interfaces ```ErrorItem``` or ```LoadingItem```
+
+#####Custom error:
+
+```java
+public class CustomError implements ErrorItem {
+
+           @Override
+           public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+               View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_error, parent, false);
+               return new RecyclerView.ViewHolder(view) {
+               };
+           }
+
+
+           @Override
+           public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, final OnRepeatListener onRepeatListener) {
+
+               Button btnRepeat = (Button) holder.itemView.findViewById(R.id.btnRepeat);
+
+               btnRepeat.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       if (onRepeatListener != null) {
+                           onRepeatListener.onClickRepeat(); //call onLoadMore
+                       }
+                   }
+               });
+           }
+
+}
+
+
+```
+
+
+#####Custom loading:
+```java
+public interface LoadingItem extends BaseLinearLayoutManagerItem {
+
+
+    LoadingItem DEFAULT = new LoadingItem() {
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
+            return new RecyclerView.ViewHolder(view) {
+            };
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        }
+    };
+
+
+}
+```
+
+##### Install with custom items
+
+```java
+  Paginate  paginate = new PaginateBuilder()
+                .with(recyclerView)
+                .setCallback(new OnLoadMore() {
+                    @Override
+                    public void onLoadMore() {
+
+                    }
+                })
+                .setLoadingTriggerThreshold(5)
+                .setCustomErrorItem(new CustomError())
+                .setCustomLoadingItem(new CustomLoading())
+                .build();
+
+```
+
+
+##### Idea
+This repository is a slightly modified version of [Paginate](https://github.com/MarkoMilos/Paginate) library.
+Author: [@MarkoMilos](https://github.com/MarkoMilos)
+
+We decided to modify it a little, so that developers could easily use it with MVP or Clean Architecture
+
+
+##### TODO
+1. Double-sided pagination
+2. Delegate for ```Presenter``` or ```Interactor```, with implementation Limit/Offset and Page pagination
 
 ### License
 ```
