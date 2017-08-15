@@ -19,7 +19,12 @@ compile 'ru.alexbykov:nopaginate:0.4.3'
                 })
                 .setLoadingTriggerThreshold(5)
                 .build();
+
+
+
 ```
+If you use ```MVP``` or ```Clean Architecture```, don't forget implement ```PaginateView```.
+You can see example of implementation with MVP [here](https://github.com/NoNews/NoPaginate/tree/master/sample/src/main/java/ru/alexbykov/pagination)
 
 ### Actions
 ```java
