@@ -3,11 +3,10 @@ Android pagination library, based on [@MarkoMilos](https://github.com/MarkoMilos
 
 
 
+Loading Item           |  Error Item
+:-------------------------:|:-------------------------:
+![](https://github.com/NoNews/NoPaginate/blob/master/art/loading.jpg "Loading item")  | ![](https://github.com/NoNews/NoPaginate/blob/master/art/error.jpg "Error item")
 
-![](https://github.com/NoNews/NoPaginate/blob/master/art/loading.jpg "Loading item")
-
-
-![](https://github.com/NoNews/NoPaginate/blob/master/art/error.jpg "Error item")
 
 
 ### Gradle
@@ -41,7 +40,6 @@ You can see example of implementation with MVP [here](https://github.com/NoNews/
    paginate.showError(show);
    paginate.setPaginateNoMoreItems(set);
    paginate.unSubscribe(); //Don't forget call it on onDestroy();
-
 ```
 
 ### Custom Loading and Error
@@ -58,12 +56,9 @@ public class CustomError implements ErrorItem {
                };
            }
 
-
            @Override
            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, final OnRepeatListener onRepeatListener) {
-
                Button btnRepeat = (Button) holder.itemView.findViewById(R.id.btnRepeat);
-
                btnRepeat.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
@@ -73,18 +68,13 @@ public class CustomError implements ErrorItem {
                    }
                });
            }
-
 }
-
-
 ```
 
 
 #### Custom loading:
 ```java
-public interface LoadingItem extends BaseLinearLayoutManagerItem {
-
-
+public class CustomLoadingItem implements LoadingItem {
     LoadingItem DEFAULT = new LoadingItem() {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -92,14 +82,10 @@ public interface LoadingItem extends BaseLinearLayoutManagerItem {
             return new RecyclerView.ViewHolder(view) {
             };
         }
-
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
         }
     };
-
-
 }
 ```
 
