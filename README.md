@@ -32,8 +32,7 @@ compile 'ru.alexbykov:nopaginate:0.4.3'
 ### Custom Loading and Error
 For custom error and loaging item just implement the interfaces ```ErrorItem``` or ```LoadingItem```
 
-#####Custom error:
-
+#### Custom error:
 ```java
 public class CustomError implements ErrorItem {
 
@@ -66,7 +65,7 @@ public class CustomError implements ErrorItem {
 ```
 
 
-#####Custom loading:
+#### Custom loading:
 ```java
 public interface LoadingItem extends BaseLinearLayoutManagerItem {
 
