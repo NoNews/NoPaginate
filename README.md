@@ -4,10 +4,10 @@ Android pagination library, based on [@MarkoMilos](https://github.com/MarkoMilos
 
 
 
-![](https://github.com/NoNews/CodeGeneration/blob/master/art/loading.png)
+![](https://github.com/NoNews/NoPaginate/blob/master/art/loading.jpg "Loading item")
 
 
-![](https://github.com/NoNews/CodeGeneration/blob/master/images/error.jpg)
+![](https://github.com/NoNews/NoPaginate/blob/master/art/error.jpg "Error item")
 
 
 ### Gradle
