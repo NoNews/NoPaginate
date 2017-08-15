@@ -89,7 +89,7 @@ public interface LoadingItem extends BaseLinearLayoutManagerItem {
 }
 ```
 
-##### Install with custom items
+#### Install with custom items
 
 ```java
   Paginate  paginate = new PaginateBuilder()
@@ -108,14 +108,14 @@ public interface LoadingItem extends BaseLinearLayoutManagerItem {
 ```
 
 
-##### Idea
+#### Idea
 This repository is a slightly modified version of [Paginate](https://github.com/MarkoMilos/Paginate) library.
 Author: [@MarkoMilos](https://github.com/MarkoMilos)
 
 We decided to modify it a little, so that developers could easily use it with MVP or Clean Architecture
 
 
-##### TODO
+#### Todo
 1. Double-sided pagination
 2. Delegate for ```Presenter``` or ```Interactor```, with implementation Limit/Offset and Page pagination
 
