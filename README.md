@@ -1,6 +1,15 @@
 # NoPaginate
 Android pagination library, based on [@MarkoMilos](https://github.com/MarkoMilos) repository [Paginate](https://github.com/MarkoMilos/Paginate)
 
+
+
+
+![](https://github.com/NoNews/CodeGeneration/blob/master/art/loading.png)
+
+
+![](https://github.com/NoNews/CodeGeneration/blob/master/images/error.jpg)
+
+
 ### Gradle
 
 ```
@@ -19,9 +28,6 @@ compile 'ru.alexbykov:nopaginate:0.4.3'
                 })
                 .setLoadingTriggerThreshold(5)
                 .build();
-
-
-
 ```
 
 
