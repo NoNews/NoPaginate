@@ -47,7 +47,7 @@ For custom error and loaging item just implement the interfaces ```ErrorItem``` 
 
 #### Custom error:
 ```java
-public class CustomError implements ErrorItem {
+public class CustomErrorItem implements ErrorItem {
 
            @Override
            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -101,8 +101,8 @@ public class CustomLoadingItem implements LoadingItem {
                     }
                 })
                 .setLoadingTriggerThreshold(5)
-                .setCustomErrorItem(new CustomError())
-                .setCustomLoadingItem(new CustomLoading())
+                .setCustomErrorItem(new CustomErrorItem())
+                .setCustomLoadingItem(new CustomLoadingItem())
                 .build();
 
 ```
