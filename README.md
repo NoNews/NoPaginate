@@ -134,7 +134,7 @@ You can read contribution guidelines [here](https://github.com/NoNews/NoPaginate
 
 
 #### My other libraries:
-1. [NoPaginate](https://github.com/NoNews/NoPermission) — Simple Android pagination library
+1. [NoPermission](https://github.com/NoNews/NoPermission) — Simple Android permission library, consist of only one class
 
 ### License
 ```
