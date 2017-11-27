@@ -123,6 +123,18 @@ We decided to modify it a little, so that developers could easily use it with MV
 #### Todo
 1. Double-sided pagination
 2. Delegate for ```Presenter``` or ```Interactor```, with implementation Limit/Offset and Page pagination
+3. Unit tests
+4. Refactoring
+
+#### Contributing
+
+If you find any bug, or you have suggestions, don't be shy to create [issues](https://github.com/NoNews/NoPaginate/issues) or make a [PRs](https://github.com/NoNews/NoPaginate/pulls) in the `develop` branch.
+You can read contribution guidelines [here](https://github.com/NoNews/NoPaginate/blob/master/CONTRIBUTING.md)
+
+
+
+#### My other libraries:
+1. [NoPaginate](https://github.com/NoNews/NoPermission) — Simple Android pagination library
 
 ### License
 ```
