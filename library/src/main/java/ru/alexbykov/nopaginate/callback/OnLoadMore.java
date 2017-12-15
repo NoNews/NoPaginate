@@ -5,14 +5,14 @@ package ru.alexbykov.nopaginate.callback;
  * You can contact me at: me@alexbykov.ru.
  */
 
+
+/**
+ * Use OnLoadMoreListener instead this callback.
+ * It will be remove in future
+ */
+
+@Deprecated
 public interface OnLoadMore {
 
     void onLoadMore();
-
-//    boolean isAdapterError();
-//
-//    boolean isAdapterLoading();
-//
-//    boolean isLoadedAllItems();
-
 }

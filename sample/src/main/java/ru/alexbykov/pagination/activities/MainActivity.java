@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import java.util.List;
+
 import ru.alexbykov.nopaginate.paginate.Paginate;
 import ru.alexbykov.nopaginate.paginate.PaginateBuilder;
 import ru.alexbykov.pagination.R;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
 
     private void setupRecycler() {
         adapter = new TestAdapter();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     private void setupPagination() {
         paginate = new PaginateBuilder()
                 .with(recyclerView)
-                .setCallback(mainActivityPresenter)
+                .setOnLoadMoreListener(mainActivityPresenter)
                 .setLoadingTriggerThreshold(5)
                 .build();
     }
@@ -53,23 +55,24 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
 
 
     @Override
-    public void showPaginateLoading(boolean show) {
-        paginate.showLoading(show);
+    public void showPaginateLoading(boolean isPaginateLoading) {
+        paginate.showLoading(isPaginateLoading);
     }
 
     @Override
-    public void showPaginateError(boolean show) {
-        paginate.showError(show);
+    public void showPaginateError(boolean isPaginateError) {
+        paginate.showError(isPaginateError);
     }
 
     @Override
-    public void setPaginateNoMoreData(boolean show) {
-        paginate.setPaginateNoMoreItems(show);
+    public void setPaginateNoMoreData(boolean isNoMoreItems) {
+        paginate.setNoMoreItems(isNoMoreItems);
     }
+
 
     @Override
     public void onDestroy() {
-        paginate.unSubscribe();
+        paginate.unbind();
         super.onDestroy();
     }
 }

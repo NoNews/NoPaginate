@@ -4,8 +4,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import ru.alexbykov.nopaginate.callback.ObserverCallback;
+import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
 import ru.alexbykov.nopaginate.callback.OnLoadMore;
+import ru.alexbykov.nopaginate.callback.OnLoadMoreListener;
 import ru.alexbykov.nopaginate.callback.OnRepeatListener;
 import ru.alexbykov.nopaginate.item.DefaultGridLayoutItem;
 import ru.alexbykov.nopaginate.item.ErrorItem;
@@ -18,12 +19,13 @@ import ru.alexbykov.nopaginate.paginate.grid.WrapperSpanSizeLookup;
  */
 
 
-public class Paginate implements ObserverCallback, OnRepeatListener {
+public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
 
 
     private int loadingTriggerThreshold;
     private RecyclerView recyclerView;
     private OnLoadMore paginateCallback;
+    private OnLoadMoreListener loadMoreListener;
     private WrapperAdapter wrapperAdapter;
     private LoadingItem loadingItem;
     private ErrorItem errorItem;
@@ -35,8 +37,9 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
     private boolean isLoadedAllItems;
 
 
-    Paginate(RecyclerView recyclerView, OnLoadMore paginateCallback, int loadingTriggerThreshold, LoadingItem loadingItem, ErrorItem errorItem) {
+    Paginate(RecyclerView recyclerView, OnLoadMore paginateCallback, OnLoadMoreListener loadMoreListener, int loadingTriggerThreshold, LoadingItem loadingItem, ErrorItem errorItem) {
         this.recyclerView = recyclerView;
+        this.loadMoreListener = loadMoreListener;
         this.loadingTriggerThreshold = loadingTriggerThreshold;
         this.paginateCallback = paginateCallback;
         this.loadingItem = loadingItem;
@@ -51,7 +54,7 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
         wrapperAdapterObserver = new WrapperAdapterObserver(this, wrapperAdapter);
         userAdapter.registerAdapterDataObserver(wrapperAdapterObserver);
         recyclerView.setAdapter(wrapperAdapter);
-        wrapperAdapter.setOnRepeatListener(this);
+        wrapperAdapter.setRepeatListener(this);
         checkGridLayoutManager();
     }
 
@@ -77,7 +80,12 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
 
     private void checkAdapterState() {
         if (isCanLoadMore()) {
-            paginateCallback.onLoadMore();
+            if (loadMoreListener != null) {
+                loadMoreListener.onLoadMore();
+            }
+            if (paginateCallback != null) {
+                paginateCallback.onLoadMore();
+            }
         }
     }
 
@@ -105,8 +113,14 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
         }
     }
 
-    public void showError(boolean show) {
-        if (show) {
+
+    /**
+     * This method will show error on the bottom of your recyclerView.
+     *
+     * @param isShowError - true if show, false if hide
+     */
+    public void showError(boolean isShowError) {
+        if (isShowError) {
             isError = true;
             wrapperAdapter.stateChanged(PaginateStatus.ERROR);
             ScrollUtils.fullScrollToBottom(recyclerView, wrapperAdapter);
@@ -116,6 +130,11 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
     }
 
 
+    /**
+     * This method will show error on the bottom of your recyclerView.
+     *
+     * @param show - true if show, false if hide
+     */
     public void showLoading(boolean show) {
         if (show) {
             isLoading = true;
@@ -125,7 +144,12 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
         }
     }
 
-    public void setPaginateNoMoreItems(boolean isNoMoreItems) {
+    /**
+     * This method  show error on the bottom of your recyclerView.
+     *
+     * @param isNoMoreItems - true if items ended, false if no
+     */
+    public void setNoMoreItems(boolean isNoMoreItems) {
         if (isNoMoreItems) {
             this.isLoadedAllItems = true;
             wrapperAdapter.stateChanged(PaginateStatus.NO_MORE_ITEMS);
@@ -140,12 +164,32 @@ public class Paginate implements ObserverCallback, OnRepeatListener {
         checkScroll();
     }
 
+    /**
+     * @deprecated use method {@link #setNoMoreItems(boolean)} instead this
+     */
+    @Deprecated
+    public void setPaginateNoMoreItems(boolean isNoMoreItems) {
+        setNoMoreItems(isNoMoreItems);
+    }
 
+    /**
+     * @deprecated use method {@link #unbind()} instead this
+     */
+    @Deprecated
     public void unSubscribe() {
+        unbind();
+    }
+
+    /**
+     * This method unsubscribe observer and change listeners reference to null
+     * for avoid memory leaks.
+     */
+    public void unbind() {
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-            wrapperAdapter.unSubscribe();
+            wrapperAdapter.unbind();
             userAdapter.unregisterAdapterDataObserver(wrapperAdapterObserver);
             recyclerView.setAdapter(userAdapter);
+
         } else if (recyclerView.getLayoutManager() instanceof GridLayoutManager && wrapperSpanSizeLookup != null) {
             GridLayoutManager.SpanSizeLookup spanSizeLookup = wrapperSpanSizeLookup.getWrappedSpanSizeLookup();
             ((GridLayoutManager) recyclerView.getLayoutManager()).setSpanSizeLookup(spanSizeLookup);

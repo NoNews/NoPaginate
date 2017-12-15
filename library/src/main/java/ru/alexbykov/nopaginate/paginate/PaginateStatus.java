@@ -9,13 +9,14 @@ package ru.alexbykov.nopaginate.paginate;
  *         You can contact me at me@alexbykov.ru
  */
 enum PaginateStatus {
+
     NO_MORE_ITEMS, LOADING, ERROR;
 
     public static PaginateStatus getStatus(boolean loadedAllItems, boolean adapterError) {
         if (loadedAllItems) return NO_MORE_ITEMS;
-        else if (adapterError)
+        else if (adapterError) {
             return ERROR;
-        else {
+        } else {
             return LOADING;
         }
     }
