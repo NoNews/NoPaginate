@@ -24,7 +24,7 @@ public class MainActivityPresenter implements OnLoadMoreListener {
     }
 
     private void addItems() {
-        view.addItems(MockUtils.getStartItems());
+        view.addItems(MockUtils.getMockItems());
     }
 
 
