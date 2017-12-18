@@ -8,7 +8,8 @@ package ru.alexbykov.nopaginate.callback;
  * @author Alex Bykov
  *         You can contact me at me@alexbykov.ru
  */
-public interface ObserverCallback {
+
+public interface OnAdapterChangeListener {
 
     void onAdapterChange();
 }

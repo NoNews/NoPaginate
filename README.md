@@ -18,21 +18,22 @@ Loading Item           |  Error Item
 
 ### Gradle
 
+
+Begining with Gradle 3 `compile` is deprecated.
 ```
-compile 'ru.alexbykov:nopaginate:0.4.3'
+implementation 'ru.alexbykov:nopaginate:0.4.4'
 ```
 
 ### Install
 ```java
   Paginate paginate = new PaginateBuilder()
                 .with(recyclerView)
-                .setCallback(new OnLoadMore() {
+                .setOnLoadMoreListener(new OnLoadMoreListener() {
                     @Override
                     public void onLoadMore() {
-                       // http or db request
+                        //http or db request here
                     }
                 })
-                .setLoadingTriggerThreshold(5)
                 .build();
 ```
 
@@ -45,8 +46,8 @@ You can see example of implementation with MVP [here](https://github.com/NoNews/
 ```java
    paginate.showLoading(show);
    paginate.showError(show);
-   paginate.setPaginateNoMoreItems(set);
-   paginate.unSubscribe(); //Don't forget call it on onDestroy();
+   paginate.showNoMoreItems(set);
+   paginate.unbind(); //Don't forget call it on onDestroy();
 ```
 
 ### Custom Loading and Error
@@ -64,13 +65,13 @@ public class CustomErrorItem implements ErrorItem {
            }
 
            @Override
-           public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, final OnRepeatListener onRepeatListener) {
+           public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, final OnRepeatListener repeatListener) {
                Button btnRepeat = (Button) holder.itemView.findViewById(R.id.btnRepeat);
                btnRepeat.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
-                       if (onRepeatListener != null) {
-                           onRepeatListener.onClickRepeat(); //call onLoadMore
+                       if (repeatListener != null) {
+                           repeatListener.onClickRepeat(); //call onLoadMore
                        }
                    }
                });
@@ -96,18 +97,18 @@ public class CustomLoadingItem implements LoadingItem {
 }
 ```
 
-#### Install with custom items
+#### Install with custom items and trigger threshold
 
 ```java
-  Paginate  paginate = new PaginateBuilder()
+  Paginate paginate = new PaginateBuilder()
                 .with(recyclerView)
-                .setCallback(new OnLoadMore() {
+                .setOnLoadMoreListener(new OnLoadMoreListener() {
                     @Override
                     public void onLoadMore() {
-
+                        //http or db request
                     }
                 })
-                .setLoadingTriggerThreshold(5)
+                .setLoadingTriggerThreshold(5) //0 by default
                 .setCustomErrorItem(new CustomErrorItem())
                 .setCustomLoadingItem(new CustomLoadingItem())
                 .build();
@@ -126,7 +127,6 @@ We decided to modify it a little, so that developers could easily use it with MV
 1. Double-sided pagination
 2. Delegate for ```Presenter``` or ```Interactor```, with implementation Limit/Offset and Page pagination
 3. Unit tests
-4. Refactoring
 
 #### Contributing
 

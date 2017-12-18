@@ -21,7 +21,7 @@ public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private LoadingItem loadingItem;
     private ErrorItem errorItem;
     private PaginateStatus paginateStatus = PaginateStatus.LOADING;
-    private OnRepeatListener onRepeatListener;
+    private OnRepeatListener repeatListener;
 
 
     WrapperAdapter(RecyclerView.Adapter userAdapter, LoadingItem loadingItem, ErrorItem errorItem) {
@@ -36,7 +36,9 @@ public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return ITEM_VIEW_TYPE_LOADING;
         } else if (isErrorItem(position)) {
             return ITEM_VIEW_TYPE_ERROR;
-        } else return userAdapter.getItemViewType(position);
+        } else {
+            return userAdapter.getItemViewType(position);
+        }
     }
 
 
@@ -57,8 +59,10 @@ public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (isLoadingItem(position)) {
             loadingItem.onBindViewHolder(holder, position);
         } else if (isErrorItem(position)) {
-            errorItem.onBindViewHolder(holder, position, onRepeatListener);
-        } else userAdapter.onBindViewHolder(holder, position);
+            errorItem.onBindViewHolder(holder, position, repeatListener);
+        } else {
+            userAdapter.onBindViewHolder(holder, position);
+        }
     }
 
 
@@ -98,11 +102,11 @@ public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         userAdapter.setHasStableIds(hasStableIds);
     }
 
-    void setOnRepeatListener(OnRepeatListener onRepeatListener) {
-        this.onRepeatListener = onRepeatListener;
+    void setRepeatListener(OnRepeatListener repeatListener) {
+        this.repeatListener = repeatListener;
     }
 
-    void unSubscribe() {
-        onRepeatListener = null;
+    void unbind() {
+        repeatListener = null;
     }
 }

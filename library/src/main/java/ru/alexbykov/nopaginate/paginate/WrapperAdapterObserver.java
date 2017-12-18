@@ -2,7 +2,7 @@ package ru.alexbykov.nopaginate.paginate;
 
 import android.support.v7.widget.RecyclerView;
 
-import ru.alexbykov.nopaginate.callback.ObserverCallback;
+import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
 
 
 /**
@@ -12,48 +12,48 @@ import ru.alexbykov.nopaginate.callback.ObserverCallback;
 class WrapperAdapterObserver extends RecyclerView.AdapterDataObserver {
 
     private WrapperAdapter wrapperAdapter;
-    private ObserverCallback observerCallback;
+    private OnAdapterChangeListener adapterChangeListener;
 
 
-    WrapperAdapterObserver(ObserverCallback observerCallback, WrapperAdapter wrapperAdapter) {
+    WrapperAdapterObserver(OnAdapterChangeListener adapterChangeListener, WrapperAdapter wrapperAdapter) {
         this.wrapperAdapter = wrapperAdapter;
-        this.observerCallback = observerCallback;
+        this.adapterChangeListener = adapterChangeListener;
     }
 
     @Override
     public void onItemRangeChanged(int positionStart, int itemCount) {
         wrapperAdapter.notifyItemRangeChanged(positionStart, itemCount);
-        observerCallback.onAdapterChange();
+        adapterChangeListener.onAdapterChange();
     }
 
     @Override
     public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
         wrapperAdapter.notifyItemRangeChanged(positionStart, itemCount, payload);
-        observerCallback.onAdapterChange();
+        adapterChangeListener.onAdapterChange();
     }
 
     @Override
     public void onItemRangeInserted(int positionStart, int itemCount) {
         wrapperAdapter.notifyItemRangeChanged(positionStart, itemCount);
-        observerCallback.onAdapterChange();
+        adapterChangeListener.onAdapterChange();
     }
 
     @Override
     public void onItemRangeRemoved(int positionStart, int itemCount) {
         wrapperAdapter.notifyItemRangeRemoved(positionStart, itemCount);
-        observerCallback.onAdapterChange();
+        adapterChangeListener.onAdapterChange();
     }
 
     @Override
     public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
         wrapperAdapter.notifyItemMoved(fromPosition, toPosition);
-        observerCallback.onAdapterChange();
+        adapterChangeListener.onAdapterChange();
     }
 
     @Override
     public void onChanged() {
         wrapperAdapter.notifyDataSetChanged();
-        observerCallback.onAdapterChange();
+        adapterChangeListener.onAdapterChange();
     }
 
 
