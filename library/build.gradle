@@ -10,7 +10,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "0.4.4"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,7 +41,7 @@ dependencies {
 publish {
     groupId = 'ru.alexbykov'
     artifactId = 'nopaginate'
-    publishVersion = '0.4.3'
+    publishVersion = '0.4.4'
     desc = 'Pagination library for Android'
     licences = ['Apache-2.0']
     website = 'https://github.com/NoNews/NoPaginate'
