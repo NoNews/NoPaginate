@@ -127,6 +127,7 @@ We decided to modify it a little, so that developers could easily use it with MV
 1. Double-sided pagination
 2. Delegate for ```Presenter``` or ```Interactor```, with implementation Limit/Offset and Page pagination
 3. Unit tests
+4. Wiki
 
 #### Contributing
 
