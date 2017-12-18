@@ -15,9 +15,9 @@ class WrapperAdapterObserver extends RecyclerView.AdapterDataObserver {
     private OnAdapterChangeListener adapterChangeListener;
 
 
-    WrapperAdapterObserver(OnAdapterChangeListener observerRunnable, WrapperAdapter wrapperAdapter) {
+    WrapperAdapterObserver(OnAdapterChangeListener adapterChangeListener, WrapperAdapter wrapperAdapter) {
         this.wrapperAdapter = wrapperAdapter;
-        this.adapterChangeListener = observerRunnable;
+        this.adapterChangeListener = adapterChangeListener;
     }
 
     @Override

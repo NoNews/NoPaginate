@@ -20,7 +20,7 @@ public class PaginateBuilder {
     private OnLoadMoreListener loadMoreListener;
     private LoadingItem loadingItem;
     private ErrorItem errorItem;
-    private int loadingTriggerThreshold = 5;
+    private int loadingTriggerThreshold = 0;
 
     public PaginateBuilder() {
 
