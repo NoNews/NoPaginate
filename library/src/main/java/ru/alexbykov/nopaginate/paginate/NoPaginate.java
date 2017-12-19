@@ -13,18 +13,17 @@ import ru.alexbykov.nopaginate.item.ErrorItem;
 import ru.alexbykov.nopaginate.item.LoadingItem;
 import ru.alexbykov.nopaginate.paginate.grid.WrapperSpanSizeLookup;
 
+
 /**
  * @author Alex Bykov and Marko Milos, original repository: https://github.com/MarkoMilos/Paginate
- * @deprecated Use class {@link NoPaginate}
  */
 
-@Deprecated
-public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
+
+public class NoPaginate implements OnAdapterChangeListener, OnRepeatListener {
 
 
     private int loadingTriggerThreshold;
     private RecyclerView recyclerView;
-    private OnLoadMore paginateCallback;
     private OnLoadMoreListener loadMoreListener;
     private WrapperAdapter wrapperAdapter;
     private LoadingItem loadingItem;
@@ -37,12 +36,14 @@ public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
     private boolean isLoadedAllItems;
 
 
-    @Deprecated
-    Paginate(RecyclerView recyclerView, OnLoadMore paginateCallback, OnLoadMoreListener loadMoreListener, int loadingTriggerThreshold, LoadingItem loadingItem, ErrorItem errorItem) {
+    NoPaginate(RecyclerView recyclerView,
+               OnLoadMoreListener loadMoreListener,
+               int loadingTriggerThreshold,
+               LoadingItem loadingItem,
+               ErrorItem errorItem) {
         this.recyclerView = recyclerView;
         this.loadMoreListener = loadMoreListener;
         this.loadingTriggerThreshold = loadingTriggerThreshold;
-        this.paginateCallback = paginateCallback;
         this.loadingItem = loadingItem;
         this.errorItem = errorItem;
         setupWrapper();
@@ -84,9 +85,6 @@ public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
             if (loadMoreListener != null) {
                 loadMoreListener.onLoadMore();
             }
-            if (paginateCallback != null) {
-                paginateCallback.onLoadMore();
-            }
         }
     }
 
@@ -94,7 +92,6 @@ public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
         return !isLoading && !isError && !isLoadedAllItems;
     }
 
-    @Deprecated
     @Override
     public void onAdapterChange() {
 
@@ -121,7 +118,6 @@ public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
      *
      * @param isShowError - true if show, false if hide
      */
-    @Deprecated
     public void showError(boolean isShowError) {
         if (isShowError) {
             isError = true;
@@ -138,7 +134,6 @@ public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
      *
      * @param show - true if show, false if hide
      */
-    @Deprecated
     public void showLoading(boolean show) {
         if (show) {
             isLoading = true;
@@ -153,7 +148,6 @@ public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
      *
      * @param isNoMoreItems - true if items ended, false if no
      */
-    @Deprecated
     public void setNoMoreItems(boolean isNoMoreItems) {
         if (isNoMoreItems) {
             this.isLoadedAllItems = true;
@@ -164,33 +158,15 @@ public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
     }
 
     @Override
-    @Deprecated
     public void onClickRepeat() {
         showError(false);
         checkScroll();
     }
 
     /**
-     * @deprecated use method {@link #setNoMoreItems(boolean)} instead this
-     */
-    @Deprecated
-    public void setPaginateNoMoreItems(boolean isNoMoreItems) {
-        setNoMoreItems(isNoMoreItems);
-    }
-
-    /**
-     * @deprecated use method {@link #unbind()} instead this
-     */
-    @Deprecated
-    public void unSubscribe() {
-        unbind();
-    }
-
-    /**
      * This method unsubscribe observer and change listeners reference to null
      * for avoid memory leaks.
      */
-    @Deprecated
     public void unbind() {
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
             wrapperAdapter.unbind();

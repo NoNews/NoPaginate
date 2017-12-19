@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
+import ru.alexbykov.nopaginate.paginate.NoPaginate;
+import ru.alexbykov.nopaginate.paginate.NoPaginateBuilder;
 import ru.alexbykov.nopaginate.paginate.Paginate;
 import ru.alexbykov.nopaginate.paginate.PaginateBuilder;
 import ru.alexbykov.pagination.R;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     private TestAdapter adapter;
     private MainActivityPresenter mainActivityPresenter;
     private RecyclerView recyclerView;
-    private Paginate paginate;
+    private NoPaginate noPaginate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,9 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     private void setupPagination() {
-        paginate = new PaginateBuilder()
+        noPaginate = NoPaginateBuilder
                 .with(recyclerView)
                 .setOnLoadMoreListener(mainActivityPresenter)
-                .setLoadingTriggerThreshold(5)
                 .build();
     }
 
@@ -56,23 +57,23 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
 
     @Override
     public void showPaginateLoading(boolean isPaginateLoading) {
-        paginate.showLoading(isPaginateLoading);
+        noPaginate.showLoading(isPaginateLoading);
     }
 
     @Override
     public void showPaginateError(boolean isPaginateError) {
-        paginate.showError(isPaginateError);
+        noPaginate.showError(isPaginateError);
     }
 
     @Override
     public void setPaginateNoMoreData(boolean isNoMoreItems) {
-        paginate.setNoMoreItems(isNoMoreItems);
+        noPaginate.setNoMoreItems(isNoMoreItems);
     }
 
 
     @Override
     public void onDestroy() {
-        paginate.unbind();
+        noPaginate.unbind();
         super.onDestroy();
     }
 }
