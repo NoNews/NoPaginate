@@ -46,7 +46,7 @@ You can see example of implementation with MVP [here](https://github.com/NoNews/
 ```java
    paginate.showLoading(show);
    paginate.showError(show);
-   paginate.showNoMoreItems(set);
+   paginate.setNoMoreItems(set); //Method onLoadMore will not to call
    paginate.unbind(); //Don't forget call it on onDestroy();
 ```
 
