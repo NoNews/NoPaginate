@@ -83,7 +83,7 @@ public class CustomErrorItem implements ErrorItem {
 #### Custom loading:
 ```java
 public class CustomLoadingItem implements LoadingItem {
-    LoadingItem DEFAULT = new LoadingItem() {
+   
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
@@ -92,8 +92,9 @@ public class CustomLoadingItem implements LoadingItem {
         }
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+   
         }
-    };
+   
 }
 ```
 
