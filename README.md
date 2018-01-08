@@ -19,7 +19,7 @@ Loading Item           |  Error Item
 ### Gradle
 
 
-Begining with Gradle 3 `compile` is deprecated.
+Beginning with Gradle 3 compile is deprecated.
 ```
 implementation 'ru.alexbykov:nopaginate:0.4.4'
 ```
@@ -124,7 +124,7 @@ Author: [@MarkoMilos](https://github.com/MarkoMilos)
 We decided to modify it a little, so that developers could easily use it with MVP or Clean Architecture
 
 
-#### Todo
+#### Roadmap
 1. Double-sided pagination
 2. Delegate for ```Presenter``` or ```Interactor```, with implementation Limit/Offset and Page pagination
 3. Unit tests
@@ -135,11 +135,9 @@ We decided to modify it a little, so that developers could easily use it with MV
 If you find any bug, or you have suggestions, don't be shy to create [issues](https://github.com/NoNews/NoPaginate/issues) or make a [PRs](https://github.com/NoNews/NoPaginate/pulls) in the `develop` branch.
 You can read contribution guidelines [here](https://github.com/NoNews/NoPaginate/blob/master/CONTRIBUTING.md)
 
-
-
 #### My other libraries:
 1. [NoPermission](https://github.com/NoNews/NoPermission) — Simple Android permission library, consist of only one class
-
+1. [NoRecyclerViewAdapter](https://github.com/NoNews/NoRecyclerViewAdapter) — Simple base adapter for recyclerView
 ### License
 ```
 Copyright 2017 Alex Bykov
