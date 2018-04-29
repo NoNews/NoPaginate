@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
-import ru.alexbykov.nopaginate.callback.OnLoadMore;
 import ru.alexbykov.nopaginate.callback.OnLoadMoreListener;
 import ru.alexbykov.nopaginate.callback.OnRepeatListener;
 import ru.alexbykov.nopaginate.item.DefaultGridLayoutItem;
@@ -72,13 +71,15 @@ public class NoPaginate implements OnAdapterChangeListener, OnRepeatListener {
 
 
     private void setupScrollListener() {
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                checkScroll();
-            }
-        });
+        recyclerView.addOnScrollListener(scrollListener);
     }
+
+    private RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            checkScroll();
+        }
+    };
 
     private void checkAdapterState() {
         if (isCanLoadMore()) {
@@ -172,10 +173,13 @@ public class NoPaginate implements OnAdapterChangeListener, OnRepeatListener {
             wrapperAdapter.unbind();
             userAdapter.unregisterAdapterDataObserver(wrapperAdapterObserver);
             recyclerView.setAdapter(userAdapter);
+            recyclerView.removeOnScrollListener(scrollListener);
 
         } else if (recyclerView.getLayoutManager() instanceof GridLayoutManager && wrapperSpanSizeLookup != null) {
             GridLayoutManager.SpanSizeLookup spanSizeLookup = wrapperSpanSizeLookup.getWrappedSpanSizeLookup();
             ((GridLayoutManager) recyclerView.getLayoutManager()).setSpanSizeLookup(spanSizeLookup);
+            recyclerView.removeOnScrollListener(scrollListener);
+
         }
     }
 
