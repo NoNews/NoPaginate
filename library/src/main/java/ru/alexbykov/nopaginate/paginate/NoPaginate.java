@@ -77,13 +77,15 @@ public final class NoPaginate implements OnAdapterChangeListener, OnRepeatListen
 
 
     private void setupScrollListener() {
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                checkScroll();
-            }
-        });
+        recyclerView.addOnScrollListener(scrollListener);
     }
+
+    private RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            checkScroll();
+        }
+    };
 
     private void checkAdapterState() {
         if (isCanLoadMore()) {
@@ -177,10 +179,13 @@ public final class NoPaginate implements OnAdapterChangeListener, OnRepeatListen
             wrapperAdapter.unbind();
             userAdapter.unregisterAdapterDataObserver(wrapperAdapterObserver);
             recyclerView.setAdapter(userAdapter);
+            recyclerView.removeOnScrollListener(scrollListener);
 
         } else if (recyclerView.getLayoutManager() instanceof GridLayoutManager && wrapperSpanSizeLookup != null) {
             GridLayoutManager.SpanSizeLookup spanSizeLookup = wrapperSpanSizeLookup.getWrappedSpanSizeLookup();
             ((GridLayoutManager) recyclerView.getLayoutManager()).setSpanSizeLookup(spanSizeLookup);
+            recyclerView.removeOnScrollListener(scrollListener);
+
         }
     }
 
