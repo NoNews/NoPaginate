@@ -28,17 +28,6 @@ final class NoPaginateBuilder {
         this.recyclerView = recyclerView;
     }
 
-    /**
-     * This method setup recyclerView
-     *
-     * @param recyclerView which you want to paginate
-     * @return current object
-     */
-
-
-    public static NoPaginateBuilder with(@NonNull RecyclerView recyclerView) {
-        return new NoPaginateBuilder(recyclerView);
-    }
 
 
     /**
