@@ -18,20 +18,17 @@ Loading Item           |  Error Item
 
 ### Gradle
 
-
-Beginning with Gradle 3 compile is deprecated.
 ```
-implementation 'ru.alexbykov:nopaginate:0.4.4'
+implementation 'ru.alexbykov:nopaginate:0.9.9'
 ```
 
 ### Install
 ```java
-  Paginate paginate = new PaginateBuilder()
-                .with(recyclerView)
+  NoPaginate noPaginate = NoPaginate.with(recyclerView)
                 .setOnLoadMoreListener(new OnLoadMoreListener() {
                     @Override
                     public void onLoadMore() {
-                        //http or db request here
+                        //http or db request
                     }
                 })
                 .build();
@@ -101,8 +98,8 @@ public class CustomLoadingItem implements LoadingItem {
 #### Install with custom items and trigger threshold
 
 ```java
-  Paginate paginate = new PaginateBuilder()
-                .with(recyclerView)
+
+  NoPaginate noPaginate = NoPaginate.with(recyclerView)
                 .setOnLoadMoreListener(new OnLoadMoreListener() {
                     @Override
                     public void onLoadMore() {
@@ -113,7 +110,6 @@ public class CustomLoadingItem implements LoadingItem {
                 .setCustomErrorItem(new CustomErrorItem())
                 .setCustomLoadingItem(new CustomLoadingItem())
                 .build();
-
 ```
 
 
