@@ -9,8 +9,7 @@ import android.support.v7.widget.RecyclerView;
  */
 
 
-
-public class DefaultGridLayoutItem implements BaseGridLayoutManagerItem {
+public final class DefaultGridLayoutItem implements BaseGridLayoutManagerItem {
     private final int loadingListItemSpan;
 
     public DefaultGridLayoutItem(RecyclerView.LayoutManager layoutManager) {

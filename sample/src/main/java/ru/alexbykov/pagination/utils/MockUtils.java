@@ -16,7 +16,7 @@ public class MockUtils {
     }
 
     public static List<Integer> getMockItems() {
-        List<Integer> list = new ArrayList<>();
+        final List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             list.add(i);
         }
@@ -25,14 +25,11 @@ public class MockUtils {
 
 
     public static void mockHttpRequest(final NetworkCallback networkCallback) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (RandomUtils.getRandomBoolean()) {
-                    networkCallback.onSuccess();
-                }
-                else networkCallback.onError();
+        new Handler().postDelayed(() -> {
+            if (RandomUtils.getRandomBoolean()) {
+                networkCallback.onSuccess();
             }
+            else networkCallback.onError();
         }, 2000);
     }
 

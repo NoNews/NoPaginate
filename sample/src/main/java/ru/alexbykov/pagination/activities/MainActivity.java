@@ -1,6 +1,7 @@
 package ru.alexbykov.pagination.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,15 +43,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     private void setupPagination() {
-        noPaginate = NoPaginateBuilder
-                .with(recyclerView)
+        noPaginate = NoPaginate.with(recyclerView)
                 .setOnLoadMoreListener(mainActivityPresenter)
                 .build();
     }
 
 
     @Override
-    public void addItems(List<Integer> items) {
+    public void addItems(@NonNull List<Integer> items) {
         adapter.addItems(items);
     }
 

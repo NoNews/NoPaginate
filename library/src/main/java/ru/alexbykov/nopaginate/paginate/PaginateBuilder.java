@@ -12,6 +12,9 @@ import ru.alexbykov.nopaginate.item.LoadingItem;
  * You can contact me at: me@alexbykov.ru.
  *
  * @deprecated use {@link NoPaginateBuilder}
+ *
+ * WARNING: This class will be removed in 1.0.3 version.
+ * Be careful!
  */
 
 public class PaginateBuilder {

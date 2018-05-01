@@ -16,10 +16,13 @@ import ru.alexbykov.nopaginate.paginate.grid.WrapperSpanSizeLookup;
 /**
  * @author Alex Bykov and Marko Milos, original repository: https://github.com/MarkoMilos/Paginate
  * @deprecated Use class {@link NoPaginate}
+ *
+ * WARNING: This class will be removed in 1.0.3 version.
+ * Be careful!
  */
 
 @Deprecated
-public class Paginate implements OnAdapterChangeListener, OnRepeatListener {
+public final class Paginate implements OnAdapterChangeListener, OnRepeatListener {
 
 
     private int loadingTriggerThreshold;

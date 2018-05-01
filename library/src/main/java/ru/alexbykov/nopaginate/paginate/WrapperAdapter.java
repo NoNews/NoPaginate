@@ -12,7 +12,7 @@ import ru.alexbykov.nopaginate.item.LoadingItem;
  * You can contact me at: me@alexbykov.ru.
  */
 
-public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public final class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int ITEM_VIEW_TYPE_LOADING = 46699933;
     private static final int ITEM_VIEW_TYPE_ERROR = 46699932;

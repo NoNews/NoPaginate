@@ -1,11 +1,11 @@
 package ru.alexbykov.nopaginate.paginate;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
-import ru.alexbykov.nopaginate.callback.OnLoadMore;
 import ru.alexbykov.nopaginate.callback.OnLoadMoreListener;
 import ru.alexbykov.nopaginate.callback.OnRepeatListener;
 import ru.alexbykov.nopaginate.item.DefaultGridLayoutItem;
@@ -19,7 +19,7 @@ import ru.alexbykov.nopaginate.paginate.grid.WrapperSpanSizeLookup;
  */
 
 
-public class NoPaginate implements OnAdapterChangeListener, OnRepeatListener {
+public final class NoPaginate implements OnAdapterChangeListener, OnRepeatListener {
 
 
     private int loadingTriggerThreshold;
@@ -48,6 +48,11 @@ public class NoPaginate implements OnAdapterChangeListener, OnRepeatListener {
         this.errorItem = errorItem;
         setupWrapper();
         setupScrollListener();
+    }
+
+
+    public static NoPaginateBuilder with(@NonNull RecyclerView recyclerView){
+        return new NoPaginateBuilder(recyclerView);
     }
 
     private void setupWrapper() {

@@ -11,7 +11,7 @@ import ru.alexbykov.nopaginate.paginate.WrapperAdapter;
  */
 
 
-public class WrapperSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+public final class WrapperSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
     private final GridLayoutManager.SpanSizeLookup wrappedSpanSizeLookup;
     private final BaseGridLayoutManagerItem loadingListItemSpanLookup;
     private final WrapperAdapter wrapperAdapter;
