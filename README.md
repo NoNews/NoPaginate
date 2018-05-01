@@ -41,10 +41,10 @@ You can see example of implementation with MVP [here](https://github.com/NoNews/
 
 ### Actions
 ```java
-   paginate.showLoading(show);
-   paginate.showError(show);
-   paginate.setNoMoreItems(set); //Method onLoadMore will not to call
-   paginate.unbind(); //Don't forget call it on onDestroy();
+   noPaginate.showLoading(show);
+   noPaginate.showError(show);
+   noPaginate.setNoMoreItems(set); //Method onLoadMore will not to call
+   noPaginate.unbind(); //Don't forget call it on onDestroy();
 ```
 
 ### Custom Loading and Error
