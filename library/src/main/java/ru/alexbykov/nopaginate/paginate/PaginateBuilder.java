@@ -12,11 +12,12 @@ import ru.alexbykov.nopaginate.item.LoadingItem;
  * You can contact me at: me@alexbykov.ru.
  *
  * @deprecated use {@link NoPaginateBuilder}
- *
+ * <p>
  * WARNING: This class will be removed in 1.0.3 version.
  * Be careful!
  */
 
+@Deprecated
 public class PaginateBuilder {
 
 
@@ -27,6 +28,10 @@ public class PaginateBuilder {
     private ErrorItem errorItem;
     private int loadingTriggerThreshold = 0;
 
+    /**
+     * @deprecated use {@link NoPaginateBuilder}
+     */
+    @Deprecated
     public PaginateBuilder() {
     }
 
@@ -42,7 +47,6 @@ public class PaginateBuilder {
         this.recyclerView = recyclerView;
         return this;
     }
-
 
 
     /**

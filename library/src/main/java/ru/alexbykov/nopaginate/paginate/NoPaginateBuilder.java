@@ -14,7 +14,7 @@ import ru.alexbykov.nopaginate.item.LoadingItem;
  * You can contact me at: me@alexbykov.ru.
  */
 
-final class NoPaginateBuilder {
+public final class NoPaginateBuilder {
 
 
     private RecyclerView recyclerView;

@@ -9,9 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 import ru.alexbykov.nopaginate.paginate.NoPaginate;
-import ru.alexbykov.nopaginate.paginate.NoPaginateBuilder;
-import ru.alexbykov.nopaginate.paginate.Paginate;
-import ru.alexbykov.nopaginate.paginate.PaginateBuilder;
 import ru.alexbykov.pagination.R;
 import ru.alexbykov.pagination.adapters.TestAdapter;
 import ru.alexbykov.pagination.presenters.MainActivityPresenter;
@@ -45,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     private void setupPagination() {
         noPaginate = NoPaginate.with(recyclerView)
                 .setOnLoadMoreListener(mainActivityPresenter)
+                .setLoadingTriggerThreshold(3)
                 .build();
     }
 
