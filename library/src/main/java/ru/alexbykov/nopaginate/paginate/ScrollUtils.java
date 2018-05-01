@@ -1,5 +1,6 @@
 package ru.alexbykov.nopaginate.paginate;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -10,15 +11,15 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
  * Project: NoPagination
  *
  * @author Alex Bykov
- * You can contact me at me@alexbykov.ru
+ *         You can contact me at me@alexbykov.ru
  */
-class ScrollUtils {
+final class ScrollUtils {
 
 
     private ScrollUtils() {
     }
 
-    static boolean isOnBottom(RecyclerView recyclerView, int loadingTriggerThreshold) {
+    static boolean isOnBottom(@NonNull RecyclerView recyclerView, int loadingTriggerThreshold) {
         final int visibleItemCount = recyclerView.getChildCount();
         final int totalItemCount = recyclerView.getLayoutManager().getItemCount();
         final int firstVisibleItemPosition = getFirstVisibleItemPositionByLayoutManager(recyclerView.getLayoutManager());
@@ -28,7 +29,8 @@ class ScrollUtils {
 
     }
 
-    private static int getFirstVisibleItemPositionByLayoutManager(RecyclerView.LayoutManager layoutManager) {
+    private static int getFirstVisibleItemPositionByLayoutManager(@NonNull RecyclerView.LayoutManager
+                                                                          layoutManager) {
         int firstVisibleItemPosition;
         if (layoutManager instanceof LinearLayoutManager) {
             firstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
@@ -47,7 +49,8 @@ class ScrollUtils {
     }
 
 
-    static void fullScrollToBottom(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+    static void fullScrollToBottom(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.Adapter
+            adapter) {
         recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, adapter.getItemCount() - 1);
     }
 }

@@ -1,5 +1,7 @@
 package ru.alexbykov.nopaginate.paginate;
 
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.OnLoadMore;
@@ -10,54 +12,23 @@ import ru.alexbykov.nopaginate.item.LoadingItem;
 /**
  * Created by Alex Bykov on 11.08.2017.
  * You can contact me at: me@alexbykov.ru.
- *
- * @deprecated use {@link NoPaginateBuilder}
- * <p>
- * WARNING: This class will be removed in 1.0.3 version.
- * Be careful!
  */
 
-@Deprecated
-public class PaginateBuilder {
+public final class NoPaginateBuilder {
 
 
     private RecyclerView recyclerView;
-    private OnLoadMore paginateCallback;
     private OnLoadMoreListener loadMoreListener;
     private LoadingItem loadingItem;
     private ErrorItem errorItem;
     private int loadingTriggerThreshold = 0;
 
-    /**
-     * @deprecated use {@link NoPaginateBuilder}
-     */
-    @Deprecated
-    public PaginateBuilder() {
-    }
 
-
-    /**
-     * This method setup recyclerView
-     *
-     * @param recyclerView which you want to paginate
-     * @return current object
-     */
-    @Deprecated
-    public PaginateBuilder with(RecyclerView recyclerView) {
+    NoPaginateBuilder(@NonNull RecyclerView recyclerView) {
         this.recyclerView = recyclerView;
-        return this;
     }
 
 
-    /**
-     * @return current object
-     * @deprecated use method {@link #setOnLoadMoreListener(OnLoadMoreListener)}
-     */
-    @Deprecated
-    public PaginateBuilder setCallback(OnLoadMore paginateCallback) {
-        this.paginateCallback = paginateCallback;
-        return this;
-    }
 
     /**
      * This method setup OnLoadMoreListener object, which will called when you need load data
@@ -65,8 +36,7 @@ public class PaginateBuilder {
      * @param loadMoreListener object of {@link OnLoadMoreListener}
      * @return current object
      */
-    @Deprecated
-    public PaginateBuilder setOnLoadMoreListener(OnLoadMoreListener loadMoreListener) {
+    public NoPaginateBuilder setOnLoadMoreListener(@NonNull OnLoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
         return this;
     }
@@ -79,8 +49,7 @@ public class PaginateBuilder {
      * @param loadingTriggerThreshold number of items from the end of the list.
      * @return current object
      */
-    @Deprecated
-    public PaginateBuilder setLoadingTriggerThreshold(int loadingTriggerThreshold) {
+    public NoPaginateBuilder setLoadingTriggerThreshold(@IntRange(from = 0) int loadingTriggerThreshold) {
         this.loadingTriggerThreshold = loadingTriggerThreshold;
         return this;
     }
@@ -91,8 +60,7 @@ public class PaginateBuilder {
      * @param loadingItem is implementation of {@link LoadingItem}
      * @return current object
      */
-    @Deprecated
-    public PaginateBuilder setCustomLoadingItem(LoadingItem loadingItem) {
+    public NoPaginateBuilder setCustomLoadingItem(@NonNull LoadingItem loadingItem) {
         this.loadingItem = loadingItem;
         return this;
     }
@@ -103,8 +71,7 @@ public class PaginateBuilder {
      * @param errorItem is implementation of {@link ErrorItem}
      * @return current object
      */
-    @Deprecated
-    public PaginateBuilder setCustomErrorItem(ErrorItem errorItem) {
+    public NoPaginateBuilder setCustomErrorItem(@NonNull ErrorItem errorItem) {
         this.errorItem = errorItem;
         return this;
     }
@@ -112,10 +79,9 @@ public class PaginateBuilder {
     /**
      * This method build all configurations
      *
-     * @return object of {@link Paginate}
+     * @return object of {@link NoPaginate}
      */
-    @Deprecated
-    public Paginate build() {
+    public NoPaginate build() {
         if (loadingItem == null) {
             loadingItem = LoadingItem.DEFAULT;
         }
@@ -123,7 +89,7 @@ public class PaginateBuilder {
             errorItem = ErrorItem.DEFAULT;
         }
 
-        return new Paginate(recyclerView, paginateCallback, loadMoreListener, loadingTriggerThreshold, loadingItem, errorItem);
+        return new NoPaginate(recyclerView, loadMoreListener, loadingTriggerThreshold, loadingItem, errorItem);
     }
 
 

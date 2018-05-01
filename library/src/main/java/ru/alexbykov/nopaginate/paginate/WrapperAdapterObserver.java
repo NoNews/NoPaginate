@@ -9,7 +9,7 @@ import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
  * @author @Marko Milos, original repository: https://github.com/MarkoMilos/Paginate
  */
 
-class WrapperAdapterObserver extends RecyclerView.AdapterDataObserver {
+final class WrapperAdapterObserver extends RecyclerView.AdapterDataObserver {
 
     private WrapperAdapter wrapperAdapter;
     private OnAdapterChangeListener adapterChangeListener;

@@ -1,11 +1,11 @@
 package ru.alexbykov.nopaginate.paginate;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
-import ru.alexbykov.nopaginate.callback.OnLoadMore;
 import ru.alexbykov.nopaginate.callback.OnLoadMoreListener;
 import ru.alexbykov.nopaginate.callback.OnRepeatListener;
 import ru.alexbykov.nopaginate.item.DefaultGridLayoutItem;
@@ -13,43 +13,55 @@ import ru.alexbykov.nopaginate.item.ErrorItem;
 import ru.alexbykov.nopaginate.item.LoadingItem;
 import ru.alexbykov.nopaginate.paginate.grid.WrapperSpanSizeLookup;
 
+
 /**
  * @author Alex Bykov and Marko Milos, original repository: https://github.com/MarkoMilos/Paginate
- * @deprecated Use class {@link NoPaginate}
- *
- * WARNING: This class will be removed in 1.0.3 version.
- * Be careful!
  */
 
-@Deprecated
-public final class Paginate implements OnAdapterChangeListener, OnRepeatListener {
+
+public final class NoPaginate implements OnAdapterChangeListener, OnRepeatListener {
 
 
-    private int loadingTriggerThreshold;
-    private RecyclerView recyclerView;
-    private OnLoadMore paginateCallback;
-    private OnLoadMoreListener loadMoreListener;
+    private final int loadingTriggerThreshold;
+    private final RecyclerView recyclerView;
+    private final OnLoadMoreListener loadMoreListener;
+    private final LoadingItem loadingItem;
+    private final ErrorItem errorItem;
+
     private WrapperAdapter wrapperAdapter;
-    private LoadingItem loadingItem;
-    private ErrorItem errorItem;
     private WrapperAdapterObserver wrapperAdapterObserver;
     private RecyclerView.Adapter userAdapter;
     private WrapperSpanSizeLookup wrapperSpanSizeLookup;
+
     private boolean isError;
     private boolean isLoading;
     private boolean isLoadedAllItems;
 
+    private final RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            checkScroll();
+        }
+    };
 
-    @Deprecated
-    Paginate(RecyclerView recyclerView, OnLoadMore paginateCallback, OnLoadMoreListener loadMoreListener, int loadingTriggerThreshold, LoadingItem loadingItem, ErrorItem errorItem) {
+
+    NoPaginate(RecyclerView recyclerView,
+               OnLoadMoreListener loadMoreListener,
+               int loadingTriggerThreshold,
+               LoadingItem loadingItem,
+               ErrorItem errorItem) {
         this.recyclerView = recyclerView;
         this.loadMoreListener = loadMoreListener;
         this.loadingTriggerThreshold = loadingTriggerThreshold;
-        this.paginateCallback = paginateCallback;
         this.loadingItem = loadingItem;
         this.errorItem = errorItem;
         setupWrapper();
         setupScrollListener();
+    }
+
+
+    public static NoPaginateBuilder with(@NonNull RecyclerView recyclerView) {
+        return new NoPaginateBuilder(recyclerView);
     }
 
     private void setupWrapper() {
@@ -74,21 +86,14 @@ public final class Paginate implements OnAdapterChangeListener, OnRepeatListener
 
 
     private void setupScrollListener() {
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                checkScroll();
-            }
-        });
+        recyclerView.addOnScrollListener(scrollListener);
     }
+
 
     private void checkAdapterState() {
         if (isCanLoadMore()) {
             if (loadMoreListener != null) {
                 loadMoreListener.onLoadMore();
-            }
-            if (paginateCallback != null) {
-                paginateCallback.onLoadMore();
             }
         }
     }
@@ -97,7 +102,6 @@ public final class Paginate implements OnAdapterChangeListener, OnRepeatListener
         return !isLoading && !isError && !isLoadedAllItems;
     }
 
-    @Deprecated
     @Override
     public void onAdapterChange() {
 
@@ -124,7 +128,6 @@ public final class Paginate implements OnAdapterChangeListener, OnRepeatListener
      *
      * @param isShowError - true if show, false if hide
      */
-    @Deprecated
     public void showError(boolean isShowError) {
         if (isShowError) {
             isError = true;
@@ -141,7 +144,6 @@ public final class Paginate implements OnAdapterChangeListener, OnRepeatListener
      *
      * @param show - true if show, false if hide
      */
-    @Deprecated
     public void showLoading(boolean show) {
         if (show) {
             isLoading = true;
@@ -156,7 +158,6 @@ public final class Paginate implements OnAdapterChangeListener, OnRepeatListener
      *
      * @param isNoMoreItems - true if items ended, false if no
      */
-    @Deprecated
     public void setNoMoreItems(boolean isNoMoreItems) {
         if (isNoMoreItems) {
             this.isLoadedAllItems = true;
@@ -167,34 +168,18 @@ public final class Paginate implements OnAdapterChangeListener, OnRepeatListener
     }
 
     @Override
-    @Deprecated
     public void onClickRepeat() {
         showError(false);
         checkScroll();
     }
 
     /**
-     * @deprecated use method {@link #setNoMoreItems(boolean)} instead this
-     */
-    @Deprecated
-    public void setPaginateNoMoreItems(boolean isNoMoreItems) {
-        setNoMoreItems(isNoMoreItems);
-    }
-
-    /**
-     * @deprecated use method {@link #unbind()} instead this
-     */
-    @Deprecated
-    public void unSubscribe() {
-        unbind();
-    }
-
-    /**
      * This method unsubscribe observer and change listeners reference to null
      * for avoid memory leaks.
      */
-    @Deprecated
     public void unbind() {
+        recyclerView.removeOnScrollListener(scrollListener);
+
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
             wrapperAdapter.unbind();
             userAdapter.unregisterAdapterDataObserver(wrapperAdapterObserver);

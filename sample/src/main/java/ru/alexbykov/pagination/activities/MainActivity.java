@@ -1,14 +1,14 @@
 package ru.alexbykov.pagination.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.alexbykov.nopaginate.paginate.Paginate;
-import ru.alexbykov.nopaginate.paginate.PaginateBuilder;
+import ru.alexbykov.nopaginate.paginate.NoPaginate;
 import ru.alexbykov.pagination.R;
 import ru.alexbykov.pagination.adapters.TestAdapter;
 import ru.alexbykov.pagination.presenters.MainActivityPresenter;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     private TestAdapter adapter;
     private MainActivityPresenter mainActivityPresenter;
     private RecyclerView recyclerView;
-    private Paginate paginate;
+    private NoPaginate noPaginate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,39 +40,38 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     private void setupPagination() {
-        paginate = new PaginateBuilder()
-                .with(recyclerView)
+        noPaginate = NoPaginate.with(recyclerView)
                 .setOnLoadMoreListener(mainActivityPresenter)
-                .setLoadingTriggerThreshold(5)
+                .setLoadingTriggerThreshold(3)
                 .build();
     }
 
 
     @Override
-    public void addItems(List<Integer> items) {
+    public void addItems(@NonNull List<Integer> items) {
         adapter.addItems(items);
     }
 
 
     @Override
     public void showPaginateLoading(boolean isPaginateLoading) {
-        paginate.showLoading(isPaginateLoading);
+        noPaginate.showLoading(isPaginateLoading);
     }
 
     @Override
     public void showPaginateError(boolean isPaginateError) {
-        paginate.showError(isPaginateError);
+        noPaginate.showError(isPaginateError);
     }
 
     @Override
     public void setPaginateNoMoreData(boolean isNoMoreItems) {
-        paginate.setNoMoreItems(isNoMoreItems);
+        noPaginate.setNoMoreItems(isNoMoreItems);
     }
 
 
     @Override
     public void onDestroy() {
-        paginate.unbind();
+        noPaginate.unbind();
         super.onDestroy();
     }
 }

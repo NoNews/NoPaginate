@@ -8,7 +8,7 @@ package ru.alexbykov.nopaginate.paginate;
  * @author Alex Bykov
  *         You can contact me at me@alexbykov.ru
  */
-enum PaginateStatus {
+enum  PaginateStatus {
 
     NO_MORE_ITEMS, LOADING, ERROR;
 
