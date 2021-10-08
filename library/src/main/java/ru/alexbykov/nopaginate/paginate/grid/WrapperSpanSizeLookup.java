@@ -1,6 +1,6 @@
 package ru.alexbykov.nopaginate.paginate.grid;
 
-import android.support.v7.widget.GridLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import ru.alexbykov.nopaginate.item.BaseGridLayoutManagerItem;
 import ru.alexbykov.nopaginate.paginate.WrapperAdapter;

@@ -1,6 +1,6 @@
 package ru.alexbykov.nopaginate.paginate;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
 

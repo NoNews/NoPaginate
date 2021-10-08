@@ -1,8 +1,8 @@
 package ru.alexbykov.nopaginate.paginate;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import ru.alexbykov.nopaginate.callback.OnAdapterChangeListener;
 import ru.alexbykov.nopaginate.callback.OnLoadMore;

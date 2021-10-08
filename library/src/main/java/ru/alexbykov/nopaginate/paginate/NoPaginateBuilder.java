@@ -1,10 +1,9 @@
 package ru.alexbykov.nopaginate.paginate;
 
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import ru.alexbykov.nopaginate.callback.OnLoadMore;
 import ru.alexbykov.nopaginate.callback.OnLoadMoreListener;
 import ru.alexbykov.nopaginate.item.ErrorItem;
 import ru.alexbykov.nopaginate.item.LoadingItem;
