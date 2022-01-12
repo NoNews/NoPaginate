@@ -4,6 +4,8 @@
  [ ![Download](https://api.bintray.com/packages/nonews/maven/nopaginate/images/download.svg) ](https://bintray.com/nonews/maven/nopaginate/_latestVersion)
  [![API](https://img.shields.io/badge/API-15%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=null)
 
+Deprecated. 
+
 Android pagination library, based on [@MarkoMilos](https://github.com/MarkoMilos) repository [Paginate](https://github.com/MarkoMilos/Paginate)
 
 
